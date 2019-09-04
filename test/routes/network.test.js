@@ -60,7 +60,7 @@ describe('network routes', () => {
           monitorId: monitor._id.toString(),
           createdAt: expect.any(String),
           updatedAt: expect.any(String),
-          __v: 0
+          __v: 0  
         });
       });
   });
