@@ -4,6 +4,7 @@ const request = require('supertest');
 const app = require('../../lib/app');
 const connect = require('../../lib/utils/connect');
 const mongoose = require('mongoose');
+const Monitor = require('../../lib/models/Monitors');
 
 describe('network routes', () => {
   beforeAll(() => {
@@ -42,6 +43,23 @@ describe('network routes', () => {
       .delete('/deregister')
       .then(res => {
         expect(res.status).toEqual(204);
+      });
+  });
+
+  it('can recieve temperature', async() => {
+    const monitor = await Monitor.create({ name: 'mars' });
+    const temperature = 45;
+
+    return request(app)
+      .post(`/temp/${monitor._id}`)
+      .send({ temperature })
+      .then(res => {
+        expect(res.body).toEqual({
+          _id: expect.any(String),
+          temperature: 45,
+          monitorId: monitor._id.toString(),
+          __v: 0
+        });
       });
   });
 });
