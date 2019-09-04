@@ -4,7 +4,6 @@ const request = require('supertest');
 const app = require('../../lib/app');
 const connect = require('../../lib/utils/connect');
 const mongoose = require('mongoose');
-const Monitor = require('../../lib/models/Monitors');
 
 describe('network routes', () => {
   beforeAll(() => {
@@ -35,6 +34,14 @@ describe('network routes', () => {
       .then(res => {
         expect(res.status).toEqual(200);
         expect(res.body.id).toEqual(expect.any(String));
+      });
+  });
+
+  it('can deregister a monitor by id', () => {
+    return request(app)
+      .delete('/deregister')
+      .then(res => {
+        expect(res.status).toEqual(204);
       });
   });
 });
