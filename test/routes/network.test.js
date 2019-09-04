@@ -3,7 +3,8 @@ require('dotenv').config();
 const request = require('supertest');
 const app = require('../../lib/app');
 const connect = require('../../lib/utils/connect');
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+const Monitor = require('../../lib/models/Monitors');
 
 describe('network routes', () => {
   beforeAll(() => {
@@ -23,6 +24,17 @@ describe('network routes', () => {
       .get('/status')
       .then(res => {
         expect(res.status).toEqual(204);
+      });
+  });
+
+  it('can register a monitor', () => {
+    const name = 'Mars';
+    return request(app)
+      .post('/register')
+      .send({ name })
+      .then(res => {
+        expect(res.status).toEqual(200);
+        expect(res.body.id).toEqual(expect.any(String));
       });
   });
 });
