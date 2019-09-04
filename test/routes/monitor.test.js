@@ -19,7 +19,7 @@ describe('Monitor routes', () => {
     return mongoose.connection.close();
   });
 
-  it('get all Monitors', async() => {
+  it('gets all Monitors', async() => {
     const { monitors } = await seedData();
 
     return request(app)
@@ -29,6 +29,17 @@ describe('Monitor routes', () => {
           expect(res.body).toContainEqual(JSON.parse(JSON.stringify(monitor)));
         });
         expect(res.body).toHaveLength(20);
+      });
+  });
+
+  it('gets a Monitor by ID', async() => {
+    const { monitors } = await seedData();
+    const monitor = monitors[14];
+
+    return request(app)
+      .get(`/api/v1/monitors/${monitor._id}`)
+      .then(res => {
+        expect(res.body).toEqual(JSON.parse(JSON.stringify(monitor)))
       });
   });
 
