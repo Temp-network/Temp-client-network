@@ -1,8 +1,6 @@
 require('dotenv').config();
 require('./lib/utils/connect')();
-const tempApi = require('./lib/services/tempApi');
-
-tempApi();
+require('./lib/services/tempApi')();
 
 const app = require('./lib/app');
 
