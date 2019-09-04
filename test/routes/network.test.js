@@ -58,6 +58,8 @@ describe('network routes', () => {
           _id: expect.any(String),
           temperature: 45,
           monitorId: monitor._id.toString(),
+          createdAt: expect.any(String),
+          updatedAt: expect.any(String),
           __v: 0
         });
       });
