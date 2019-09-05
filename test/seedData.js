@@ -2,7 +2,7 @@ const chance = require('chance').Chance();
 const Temp = require('../lib/models/Temp');
 const Monitor = require('../lib/models/Monitors');
 
-module.exports = async({ temperatures = 200, monitors = 15 }) => {
+module.exports = async({ temperatures = 1000, monitors = 15 } = { temperatures: 1000, monitors: 15 }) => {
   const createdMonitors = await Monitor.create(
     [...Array(monitors)].map(() => ({
       name: chance.name()
