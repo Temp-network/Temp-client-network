@@ -42,8 +42,8 @@ describe('Monitor routes', () => {
         expect(res.body).toEqual(JSON.parse(JSON.stringify(monitor)))
       });
   });
-
-  //monitor by id
-  //get all monitors
   // get all temp by monitor id
+  it('gets all temperatures by monitor id', () => {
+    
+  });
 });
